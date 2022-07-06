@@ -1,0 +1,25 @@
+
+
+import socket
+
+#Creating the socket object 
+serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+host = socket.gethostname()
+port = 444
+
+#Binding the socket 
+serversocket.bind((host, port)) #Host will be replaced/subsituted with IP, if changed and not running on host.
+
+#Starting the socket 
+serversocket.listen(3)
+
+while True:
+  clientsocket, address = serversocket.accept()
+
+print("revieved connection from" % str(address))
+
+message = 'Hello World, Thank you for connectiong the server' + "\r\n"
+clientsocket.send(message)
+
+clientsocket.close()
